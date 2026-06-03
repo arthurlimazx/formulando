@@ -1,0 +1,116 @@
+<?php
+include '../config/conexao.php';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $id = $_POST['id'];
+    $nome = $_POST['nome'];
+    $numero = $_POST['numero'];
+    $titulos = $_POST['titulos'];
+    $equipe = $_POST['equipe'];
+
+    $sql = "UPDATE pilotos SET nome = :nome, numero = :numero, titulos = :titulos, equipe = :equipe WHERE id = :id";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(':id', $id);
+    $stmt->bindValue(':nome', $nome);
+    $stmt->bindValue(':numero', $numero);
+    $stmt->bindValue(':titulos', $titulos);
+    $stmt->bindValue(':equipe', $equipe);
+
+    if ($stmt->execute()) {
+        header("Location: pilotos.php");
+        exit();
+    } else {
+        echo "Erro ao atualizar piloto.";
+    }
+}
+    $id = $_GET['id'];
+
+    $sql= 'SELECT * FROM pilotos WHERE id= :id';
+
+    $stmt= $pdo->prepare($sql);
+    $stmt->bindValue(':id', $id);
+    $stmt->execute();
+    $piloto=$stmt->fetch(PDO::FETCH_ASSOC);
+
+?>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>F1 — Cadastro de Piloto</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/navbar.css">
+  <link href="../assets/form.css" rel="stylesheet" />
+</head>
+<body>
+
+
+
+<div class="form-header">
+  <div class="form-header-eyebrow">
+    <span>F1</span>
+    <span>Temporada 2026</span>
+  </div>
+  <h1>Editar Piloto</h1>
+  <p>Atualize os dados do piloto abaixo.</p>
+</div>
+
+<div class="form-wrapper">
+
+  <div class="form-card">
+    <div class="form-card-title">Informações do Piloto</div>
+    <form method="POST" action="editar.php">
+         <input 
+            type="hidden" 
+            name="id" 
+            value="<?= $piloto['id'] ?>"
+        >
+      <div class="form-body">
+
+      <div class="field">
+        <label>Nome do piloto <span class="req">*</span></label>
+        <input type="text" placeholder="Ex: Max Verstappen" name="nome" value="<?= htmlspecialchars($piloto['nome']) ?>" />
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Número <span class="req">*</span></label>
+          <input type="number" placeholder="44" min="1" max="99" name="numero" value="<?= htmlspecialchars($piloto['numero']) ?>" />
+        </div>
+        <div class="field">
+          <label>Títulos mundiais</label>
+          <input type="number" placeholder="0" min="0" max="10" name="titulos" value="<?= htmlspecialchars($piloto['titulos']) ?>" />
+        </div>
+      </div>
+
+      <div class="field" style="margin-bottom:0">
+        <label>Equipe <span class="req">*</span></label>
+        <div class="field-select-wrap">
+          <select id="teamSelect" name="equipe">
+            <option value="" disabled selected>Selecione a equipe</option>
+            <option data-color="#3671C6" <?= $piloto['equipe'] === 'Red Bull Racing' ? 'selected' : '' ?>>Red Bull Racing</option>
+            <option data-color="#E8002D" <?= $piloto['equipe'] === 'Ferrari' ? 'selected' : '' ?>>Ferrari</option>
+            <option data-color="#27F4D2" <?= $piloto['equipe'] === 'Mercedes' ? 'selected' : '' ?>>Mercedes</option>
+            <option data-color="#FF8000" <?= $piloto['equipe'] === 'McLaren' ? 'selected' : '' ?>>McLaren</option>
+            <option data-color="#358C75" <?= $piloto['equipe'] === 'Aston Martin' ? 'selected' : '' ?>>Aston Martin</option>
+            <option data-color="#0090FF" <?= $piloto['equipe'] === 'Alpine' ? 'selected' : '' ?>>Alpine</option>
+            <option data-color="#64C4FF" <?= $piloto['equipe'] === 'Williams' ? 'selected' : '' ?>>Williams</option>
+            <option data-color="#B6BABD" <?= $piloto['equipe'] === 'Haas' ? 'selected' : '' ?>>Haas</option>
+            <option data-color="#52E252" <?= $piloto['equipe'] === 'Kick Sauber' ? 'selected' : '' ?>>Kick Sauber</option>
+            <option data-color="#DC0000" <?= $piloto['equipe'] === 'RB (VCARB)' ? 'selected' : '' ?>>RB (VCARB)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-footer">
+        <a href="pilotos.php" class="btn-cancel">← Cancelar</a>
+        <button type="submit" class="btn-submit">Atualizar piloto</button>
+      </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>
