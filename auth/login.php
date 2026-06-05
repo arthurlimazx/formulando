@@ -16,6 +16,7 @@
     <title>Document</title>
 </head>
 <body>
+    <?php include 'popup.php'; ?>
 <div class="navbar-container">
 
 
@@ -52,21 +53,21 @@
 
 
     </div>
+    
     <div class="formulario">
-        
-        
-            <form action="autenticaLogin.php" method="POST">
+    
+        <form action="autenticaLogin.php" method="POST">
             <h1>LOGIN</h1>
         <div class="input-box">
             <input type="text" name="email" placeholder="Email"> 
             
         </div>
         <div class="input-box">
-            <input type="password" name="senha" placeholder="Senha" required>
+            <input type="password" name="senha" placeholder="Senha">
         </div>
             <button type="submit" class="btn">Logar</button>
             <div class="registro">
-                <p>Não tem conta ainda? <a href="../index.php">Crie aqui</a></p>
+                <p>Não tem conta ainda? <a href="cadastro.php">Crie aqui</a></p>
 
             </div>
             </form>
