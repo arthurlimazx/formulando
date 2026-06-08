@@ -12,6 +12,7 @@ $equipes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" href="../assets/footer.css">
     <link rel="stylesheet" href="../assets/navbar.css">
     <link rel="stylesheet" href="../assets/equipes.css">
     <meta charset="UTF-8">
@@ -136,5 +137,6 @@ $equipes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </div>
     <?php endforeach; ?>
 </div>
+
 </body>
 </html>

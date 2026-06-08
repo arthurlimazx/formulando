@@ -16,6 +16,7 @@ $i = 1;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendário — Formula 2026</title>
+    <link rel="stylesheet" href="../assets/footer.css">
     <link rel="stylesheet" href="../assets/navbar.css">
     <link rel="stylesheet" href="../assets/corridas.css">
     <link rel="stylesheet" href="../assets/cards-footer.css">
@@ -161,6 +162,7 @@ $i = 1;
     </div>
     <?php $i++; endforeach; ?>
 </div>
+
 
 </body>
 </html>

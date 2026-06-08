@@ -58,7 +58,8 @@ $meses = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard — Formula 2026</title>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="assets/footer.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel='stylesheet' href='assets/dashboard.css'>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -103,17 +104,17 @@ $meses = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez
     </nav>
 </div>
 
-<!-- HEADER -->
+
 <div class="dash-header">
     <div class="dash-header-eyebrow">Painel de controle · Temporada 2026</div>
     <h1>Dashboard</h1>
     <p class="dash-header-sub">Visão geral da temporada em tempo real</p>
 </div>
 
-<!-- BODY -->
+
 <div class="dash-body">
 
-    <!-- KPIs -->
+    
     <div class="kpi-grid">
         <a href="corridas/corridas.php" class="kpi-card fade-in">
             <div class="kpi-icon">📅</div>
@@ -141,10 +142,10 @@ $meses = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez
         </div>
     </div>
 
-    <!-- NEXT RACE + UPCOMING -->
+  
     <div class="two-col">
 
-        <!-- Próxima corrida -->
+       
         <div class="next-race-card">
             <div class="next-race-label">Próxima corrida</div>
             <?php if ($proximaCorrida):
@@ -184,7 +185,7 @@ $meses = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez
             <?php endif; ?>
         </div>
 
-        <!-- Próximas corridas -->
+        
         <div class="upcoming-card">
             <div class="section-eyebrow">Calendário</div>
             <div class="section-title">Próximas corridas</div>
@@ -212,10 +213,10 @@ $meses = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez
 
     </div>
 
-    <!-- PILOTOS + EQUIPES -->
+   
     <div class="two-col">
 
-        <!-- Últimos pilotos -->
+       
         <div class="table-card">
             <div class="section-eyebrow">Grid</div>
             <div class="section-title">Pilotos recentes</div>
@@ -247,7 +248,7 @@ $meses = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez
             </div>
         </div>
 
-        <!-- Ranking equipes -->
+        
         <div class="table-card">
             <div class="section-eyebrow">Construtores</div>
             <div class="section-title">Ranking equipes</div>
@@ -278,7 +279,7 @@ $meses = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez
         <div class="section-eyebrow">Atalhos</div>
         <div class="section-title">Ações rápidas</div>
         <div class="actions-grid">
-            <a href="pilotos/formulariopiloto.php" class="action-card">
+            <a href="pilotos/create.php" class="action-card">
                 <div class="action-icon">🧑‍✈️</div>
                 <div>
                     <div class="action-text-title">Novo piloto</div>
@@ -286,7 +287,7 @@ $meses = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez
                 </div>
                 <div class="action-arrow">Adicionar →</div>
             </a>
-            <a href="equipe/formularioequipe.php" class="action-card">
+            <a href="equipe/create.php" class="action-card">
                 <div class="action-icon">🏁</div>
                 <div>
                     <div class="action-text-title">Nova equipe</div>
@@ -306,6 +307,10 @@ $meses = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez
     </div>
 
 </div>
+<footer class="footer">
+    <div class="footer-logo">Formula <span>2026</span></div>
+    <div class="footer-copy">© 2026 — Sistema de Gestão da Temporada</div>
+</footer>
 
 <?php include 'auth/popup.php'; ?>
 

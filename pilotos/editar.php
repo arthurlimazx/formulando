@@ -1,31 +1,33 @@
 <?php
 require_once '../auth/protege.php';
-
 include '../config/conexao.php';
- $user_id = $_SESSION['id'];
+
+$user_id = $_SESSION['id'];
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['id'];
-   
-
     $nome = $_POST['nome'];
     $numero = $_POST['numero'];
     $titulos = $_POST['titulos'];
     $equipe = $_POST['equipe'];
+
     if (empty($nome) || empty($numero)  || empty($equipe)) {
-    header("Location: editar.php?erro=Preencha todos os campos");
-    exit();
-}
+        
+        header("Location: editar.php?id=$id&erro=Preencha todos os campos");
+        exit();
+    }
 
-if (!is_numeric($numero) || $numero < 0) {
-    header("Location: editar.php?erro=Número inválido");
-    exit(); 
-}
- 
+    if (!is_numeric($numero) || $numero < 0) {
+        header("Location: editar.php?id=$id&erro=Número inválido");
+        exit(); 
+    }
 
-if (!is_numeric($titulos) || $titulos < 0) {
-    header("Location: editar.php?erro=Títulos inválido");
-    exit();
-}
+    if (!is_numeric($titulos) || $titulos < 0) {
+        header("Location: editar.php?id=$id&erro=Títulos inválido");
+        exit();
+    }
+
     $sql = "UPDATE pilotos SET nome = :nome, numero = :numero, titulos = :titulos, equipe = :equipe WHERE id = :id AND user_id = :user_id";
 
     $stmt = $pdo->prepare($sql);
@@ -44,14 +46,30 @@ if (!is_numeric($titulos) || $titulos < 0) {
         exit();
     }
 }
+
+
+if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    $sql= 'SELECT * FROM pilotos WHERE id= :id';
 
-    $stmt= $pdo->prepare($sql);
+    $sql = 'SELECT * FROM pilotos WHERE id= :id AND user_id = :user_id';
+
+    $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':id', $id);
+    $stmt->bindValue(':user_id', $user_id); 
     $stmt->execute();
-    $piloto=$stmt->fetch(PDO::FETCH_ASSOC);
+    $piloto = $stmt->fetch(PDO::FETCH_ASSOC);
+
+   
+    if (!$piloto) {
+        header("Location: pilotos.php");
+        exit();
+    }
+} else {
+   
+    header("Location: pilotos.php");
+    exit();
+}
 
 ?>
 <!DOCTYPE html>
@@ -66,7 +84,6 @@ if (!is_numeric($titulos) || $titulos < 0) {
 </head>
 <body>
 <?php include '../auth/popup.php'; ?>
-
 
 <div class="form-header">
   <div class="form-header-eyebrow">

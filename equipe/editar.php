@@ -1,57 +1,70 @@
 <?php
 require_once '../auth/protege.php';
-include '../config/conexao.php';
+require_once '../config/conexao.php'; 
 
-$id = $_GET['id'];
 $user_id = $_SESSION['id'];
 
-    $sql= 'SELECT * FROM equipes WHERE id= :id AND user_id = :user_id';
 
-    $stmt= $pdo->prepare($sql);
-    $stmt->bindValue(':id', $id);
-    $stmt->bindValue(':user_id', $user_id);
-    $stmt->execute();
-    $equipe=$stmt->fetch(PDO::FETCH_ASSOC);
-
-include '../config/conexao.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id= $_POST['id'];
+    $id = $_POST['id']; 
     $equipe = $_POST['equipe'];
     $descricao = $_POST['descricao'];
     $titulos = $_POST['titulos'];
+
     if (empty($equipe) || empty($descricao) || empty($titulos)) {
-    header("Location: create.php?erro=Preencha todos os campos");
-    exit();
-}
-if (!is_numeric($titulos) || $titulos < 0) {
-    header("Location: create.php?erro=Títulos inválido");
-    exit();
-}
+        header("Location: editar.php?id=$id&erro=Preencha todos os campos");
+        exit();
+    }
+    if (!is_numeric($titulos) || $titulos < 0) {
+        header("Location: editar.php?id=$id&erro=Títulos inválido");
+        exit();
+    }
 
     $sql = "UPDATE equipes SET equipe = :equipe, descricao = :descricao, titulos = :titulos WHERE id = :id AND user_id = :user_id";
-
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':id', $id);
     $stmt->bindValue(':user_id', $user_id);
     $stmt->bindValue(':equipe', $equipe);
     $stmt->bindValue(':descricao', $descricao);
     $stmt->bindValue(':titulos', $titulos);
-    $user= $stmt->execute();
-    
+    $sucesso = $stmt->execute();
 
-    if ($user) {
-        header("Location: equipes.php");
+    if ($sucesso) {
+        header("Location: equipes.php?sucesso=Equipe atualizada");
         exit();
     } else {
         header("Location: editar.php?erro=Erro ao editar equipe");
         exit();
     }
 }
-?>
+
+
+
+if (isset($_GET['id'])) {
+    $id = $_GET['id']; 
     
+    $sql = 'SELECT * FROM equipes WHERE id= :id AND user_id = :user_id';
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(':id', $id);
+    $stmt->bindValue(':user_id', $user_id);
+    $stmt->execute();
+    $equipe = $stmt->fetch(PDO::FETCH_ASSOC);
 
+    
+    if (!$equipe) {
+        header("Location: equipes.php");
+        exit();
+    }
+} else {
+    
+    header("Location: equipes.php");
+    exit();
+}
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
 <!DOCTYPE html>
 <html lang="en">
 <head>

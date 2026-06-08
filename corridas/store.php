@@ -18,6 +18,10 @@ if ($_SERVER['REQUEST_METHOD'] ==='POST') {
     exit();
 }
 
+if (!DateTime::createFromFormat('Y-m-d', $data)) {
+    header("Location: create.php?erro=Data inválida");
+    exit();
+}
 if (!is_numeric($distancia) || $distancia < 0) {
     header("Location: create.php?erro=Distância inválida");
     exit();

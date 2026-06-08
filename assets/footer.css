@@ -1,0 +1,30 @@
+ .footer {
+            background: var(--black);
+            padding: 60px 6vw;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .footer-logo {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--white);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .footer-logo span { color: var(--red); }
+
+        .footer-copy {
+            font-size: 0.78rem;
+            color: #555;
+            font-weight: 300;
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.7s ease forwards;
+        }

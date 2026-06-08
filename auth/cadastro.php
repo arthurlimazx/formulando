@@ -73,7 +73,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <li><a href="../equipe/equipes.php">EQUIPES</a></li>
       <li><a href="../corridas/corridas.php">CALENDARIO</a></li>
     </ul>
- 
+    <?php if (isset($_SESSION['id'])): ?>
+            <div class="nav-user">
+                    
+                    <a href="auth/logout.php" class="nav-logout">Sair</a>
+                </div>
+            <?php else: ?>
+            <div class="nav-user">
+                <a href="auth/login.php" class="nav-login">Entrar</a>
+                <a href="auth/cadastro.php" class="nav-cadastro">Registrar</a>
+            </div>
+            
+            <?php endif; ?>
     
     
   </div>

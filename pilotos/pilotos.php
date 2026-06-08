@@ -16,6 +16,7 @@ $pilotos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../assets/footer.css">
     <link rel="stylesheet" href="../assets/navbar.css">
     <link rel="stylesheet" href="../assets/pilotos.css">
     <link rel="stylesheet" href="../assets/cards-footer.css">
@@ -153,6 +154,7 @@ $pilotos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <?php endforeach; ?>
 </div>
+
 
 
 </body>
