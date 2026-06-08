@@ -126,18 +126,19 @@ if (isset($_GET['id'])) {
         <label>Equipe <span class="req">*</span></label>
         <div class="field-select-wrap">
           <select id="teamSelect" name="equipe">
-            <option value="" disabled selected>Selecione a equipe</option>
-            <option data-color="#3671C6" <?= $piloto['equipe'] === 'Red Bull Racing' ? 'selected' : '' ?>>Red Bull Racing</option>
-            <option data-color="#E8002D" <?= $piloto['equipe'] === 'Ferrari' ? 'selected' : '' ?>>Ferrari</option>
-            <option data-color="#27F4D2" <?= $piloto['equipe'] === 'Mercedes' ? 'selected' : '' ?>>Mercedes</option>
-            <option data-color="#FF8000" <?= $piloto['equipe'] === 'McLaren' ? 'selected' : '' ?>>McLaren</option>
-            <option data-color="#358C75" <?= $piloto['equipe'] === 'Aston Martin' ? 'selected' : '' ?>>Aston Martin</option>
-            <option data-color="#0090FF" <?= $piloto['equipe'] === 'Alpine' ? 'selected' : '' ?>>Alpine</option>
-            <option data-color="#64C4FF" <?= $piloto['equipe'] === 'Williams' ? 'selected' : '' ?>>Williams</option>
-            <option data-color="#B6BABD" <?= $piloto['equipe'] === 'Haas' ? 'selected' : '' ?>>Haas</option>
-            <option data-color="#52E252" <?= $piloto['equipe'] === 'Kick Sauber' ? 'selected' : '' ?>>Kick Sauber</option>
-            <option data-color="#DC0000" <?= $piloto['equipe'] === 'RB (VCARB)' ? 'selected' : '' ?>>RB (VCARB)</option>
-          </select>
+           <option value="" disabled selected>Selecione a equipe</option>
+            <?php
+            $stmt = $pdo->prepare("SELECT id, equipe FROM equipes WHERE user_id = :user_id ORDER BY equipe ASC");
+            $stmt->bindValue(':user_id', $_SESSION['id']);
+            $stmt->execute();
+            $equipes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($equipes as $e) {
+              $selecionado = (isset($_POST['equipe']) && $_POST['equipe'] == $e['id']) ? 'selected' : '';
+              echo "<option value=\"{$e['id']}\" {$selecionado}>{$e['equipe']}</option>";
+          }
+  ?>
+</select>
         </div>
       </div>
 
