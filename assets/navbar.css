@@ -1,0 +1,184 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+:root {
+      --vermelho: #E10600;
+      --vermelho-escuro: #C10500;
+      --backgroundnav: #15151E;
+      --scroll: rgba(21, 21, 30, 0.95);
+      
+      --text: #ffffff;
+      --border: #222;
+    }
+ 
+   
+
+    
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--backgroundnav);
+      transition: background 0.3s, backdrop-filter 0.3s, box-shadow 0.3s;
+      opacity: 1;
+    }
+ 
+    .navbar.scrolled {
+      background: var(--scroll);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+    }
+ 
+    .navbar-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+ 
+   
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      transition: transform 0.3s;
+      opacity: 1;
+    }
+    
+ 
+    .logo-icone {
+      width: 45px;
+      height: 45px;
+      border-radius: 10px;
+     
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+     
+      flex-shrink: 0;
+    }
+ 
+    .logo-text { line-height: 1; }
+ 
+    .logo-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: #fff;
+      letter-spacing: -0.5px;
+      display: block;
+    }
+ 
+    .logo-season {
+      font-family: 'Playfair Display', sans-serif;
+      font-weight: 700;
+      font-size: 0.7rem;
+      color: var(--vermelho);
+      letter-spacing: 1px;
+      display: block;
+      margin-top: 2px;
+    }
+ 
+   
+    .nav-links {
+      display: flex;
+      gap: 4px;
+      list-style: none;
+      opacity: 1;
+    }
+ 
+    .nav-links a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 8px 20px;
+      border-radius: 8px;
+      position: relative;
+      transition: background 0.3s, font-weight 0s;
+    }
+ 
+    .nav-links a:hover {
+      background: rgba(225, 6, 0, 0.15);
+    }
+ 
+    
+ 
+    .nav-links a.active:hover {
+      background: var(--vermelho-escuro);
+    }
+    .nav-user{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.nav-username{
+    color: white;
+    font-weight: 500;
+}
+
+
+
+    
+   .nav-login{
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--vermelho);
+            border: 2px solid var(--vermelho);
+            padding: 6px 16px;
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s;
+        }
+        .nav-login:hover {
+            background: var(--vermelho);
+            color: #fff;
+        }
+
+        .nav-logout{
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--vermelho);
+            border: 2px solid var(--vermelho);
+            padding: 6px 16px;
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .nav-logout:hover {
+            background: var(--vermelho);
+            color: #fff;
+        }
+ 
+   
+ 
+   
+   
+    @media (max-width: 899px) {
+      .nav-links  { display: none; }
+      .hamburger  { display: flex; }
+    }
+ 
+   

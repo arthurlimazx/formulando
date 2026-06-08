@@ -2,14 +2,54 @@
 require_once 'auth/protege.php';
 require_once 'config/conexao.php';
 
-$totalPilotos  = $pdo->query("SELECT COUNT(*) FROM pilotos")->fetchColumn();
-$totalEquipes  = $pdo->query("SELECT COUNT(*) FROM equipes")->fetchColumn();
-$totalCorridas = $pdo->query("SELECT COUNT(*) FROM corridas")->fetchColumn();
 
-$proximaCorrida = $pdo->query("SELECT * FROM corridas WHERE data >= CURDATE() ORDER BY data ASC LIMIT 1")->fetch(PDO::FETCH_ASSOC);
-$ultimosPilotos = $pdo->query("SELECT * FROM pilotos ORDER BY id DESC LIMIT 5")->fetchAll(PDO::FETCH_ASSOC);
-$topEquipes     = $pdo->query("SELECT * FROM equipes ORDER BY titulos DESC LIMIT 5")->fetchAll(PDO::FETCH_ASSOC);
-$proximasCorridas = $pdo->query("SELECT * FROM corridas WHERE data >= CURDATE() ORDER BY data ASC LIMIT 4")->fetchAll(PDO::FETCH_ASSOC);
+// Define quais os dados para o dashboard
+
+$user_id = $_SESSION['id'];
+
+// Total de pilotos
+
+$stmt = $pdo->prepare("SELECT COUNT(*) FROM pilotos WHERE user_id = :user_id");
+$stmt->execute([':user_id' => $user_id]);
+$totalPilotos = $stmt->fetchColumn();
+
+// Total de equipes
+
+$stmt = $pdo->prepare("SELECT COUNT(*) FROM equipes WHERE user_id = :user_id");
+$stmt->execute([':user_id' => $user_id]);
+$totalEquipes = $stmt->fetchColumn();
+
+// Total de corridas
+
+$stmt = $pdo->prepare("SELECT COUNT(*) FROM corridas WHERE user_id = :user_id");
+$stmt->execute([':user_id' => $user_id]);
+$totalCorridas = $stmt->fetchColumn();
+
+// Próxima corrida
+
+$stmt = $pdo->prepare("SELECT * FROM corridas WHERE data >= CURDATE() AND user_id = :user_id ORDER BY data ASC LIMIT 1");
+$stmt->execute([':user_id' => $user_id]);
+$proximaCorrida = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// Últimos pilotos cadastrados
+
+$stmt = $pdo->prepare("SELECT * FROM pilotos WHERE user_id = :user_id ORDER BY id DESC LIMIT 5");
+$stmt->execute([':user_id' => $user_id]);
+$ultimosPilotos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Top equipes por títulos
+
+$stmt = $pdo->prepare("SELECT * FROM equipes WHERE user_id = :user_id ORDER BY titulos DESC LIMIT 5");
+$stmt->execute([':user_id' => $user_id]);
+$topEquipes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Próximas corridas (além da próxima)
+
+$stmt = $pdo->prepare("SELECT * FROM corridas WHERE data >= CURDATE() AND user_id = :user_id ORDER BY data ASC LIMIT 4");
+$stmt->execute([':user_id' => $user_id]);
+$proximasCorridas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Array de meses para formatação de datas
 
 $meses = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
 ?>
@@ -30,7 +70,7 @@ $meses = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez
 </head>
 <body>
 
-<!-- NAVBAR -->
+
 <div class="navbar-container">
     <nav class="navbar" id="navbar">
         <div class="navbar-inner">

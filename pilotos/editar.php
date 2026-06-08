@@ -1,26 +1,47 @@
 <?php
+require_once '../auth/protege.php';
+
 include '../config/conexao.php';
+ $user_id = $_SESSION['id'];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['id'];
+   
+
     $nome = $_POST['nome'];
     $numero = $_POST['numero'];
     $titulos = $_POST['titulos'];
     $equipe = $_POST['equipe'];
+    if (empty($nome) || empty($numero)  || empty($equipe)) {
+    header("Location: editar.php?erro=Preencha todos os campos");
+    exit();
+}
 
-    $sql = "UPDATE pilotos SET nome = :nome, numero = :numero, titulos = :titulos, equipe = :equipe WHERE id = :id";
+if (!is_numeric($numero) || $numero < 0) {
+    header("Location: editar.php?erro=Número inválido");
+    exit(); 
+}
+ 
+
+if (!is_numeric($titulos) || $titulos < 0) {
+    header("Location: editar.php?erro=Títulos inválido");
+    exit();
+}
+    $sql = "UPDATE pilotos SET nome = :nome, numero = :numero, titulos = :titulos, equipe = :equipe WHERE id = :id AND user_id = :user_id";
 
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':id', $id);
+    $stmt->bindValue(':user_id', $user_id);
     $stmt->bindValue(':nome', $nome);
     $stmt->bindValue(':numero', $numero);
     $stmt->bindValue(':titulos', $titulos);
     $stmt->bindValue(':equipe', $equipe);
 
     if ($stmt->execute()) {
-        header("Location: pilotos.php");
+        header("Location: pilotos.php?sucesso=Piloto atualizado");
         exit();
     } else {
-        echo "Erro ao atualizar piloto.";
+        header("Location: editar.php?erro=Erro ao atualizar piloto");
+        exit();
     }
 }
     $id = $_GET['id'];
@@ -44,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <link href="../assets/form.css" rel="stylesheet" />
 </head>
 <body>
-
+<?php include '../auth/popup.php'; ?>
 
 
 <div class="form-header">

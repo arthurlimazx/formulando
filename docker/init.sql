@@ -1,0 +1,40 @@
+CREATE DATABASE IF NOT EXISTS formula1;
+USE formula1;
+ 
+CREATE TABLE IF NOT EXISTS login (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NOT NULL UNIQUE,
+    senha VARCHAR(255) NOT NULL
+
+);
+ 
+CREATE TABLE IF NOT EXISTS equipes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+     user_id INT NOT NULL,
+    equipe VARCHAR(100) NOT NULL,
+    titulos INT DEFAULT 0,
+    descricao TEXT
+);
+ 
+CREATE TABLE IF NOT EXISTS pilotos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    nome VARCHAR(100) NOT NULL,
+    numero INT NOT NULL,
+    titulos INT DEFAULT 0,
+    equipe VARCHAR(100) NOT NULL
+);
+ 
+CREATE TABLE IF NOT EXISTS corridas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+     user_id INT NOT NULL,
+    gp VARCHAR(150) NOT NULL,
+    pais VARCHAR(100) NOT NULL,
+    circuito VARCHAR(150) NOT NULL,
+    data DATE NOT NULL,
+    voltas INT,
+    distancia INT,
+    obs TEXT
+);

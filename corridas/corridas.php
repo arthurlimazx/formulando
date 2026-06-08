@@ -2,7 +2,10 @@
 require_once '../auth/protege.php';
 require_once '../config/conexao.php';
 
-$stmt = $pdo->query("SELECT * FROM corridas ORDER BY data ASC");
+$user_id = $_SESSION['id'];
+$stmt = $pdo->prepare("SELECT * FROM corridas WHERE user_id = :user_id ORDER BY data ASC");
+$stmt->bindValue(':user_id', $user_id);
+$stmt->execute();
 $corridas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $meses = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
 $i = 1;

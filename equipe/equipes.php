@@ -1,7 +1,10 @@
 <?php
 include '../config/conexao.php';
 require_once '../auth/protege.php';
-$stmt = $pdo->query("SELECT * FROM equipes");
+$user_id = $_SESSION['id'];
+$stmt = $pdo->prepare("SELECT * FROM equipes WHERE user_id = :user_id");
+$stmt->bindValue(':user_id', $user_id);
+$stmt->execute();
 $equipes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
@@ -17,15 +20,13 @@ $equipes = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Barlow:wght@300;400;500&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
-    <style>
-        body { background-color: white; }
-    </style>
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Equipes</title>
 </head>
 <body>
+  <?php include '../auth/popup.php'; ?>   
     <div class="navbar-container">
-
 
 <nav class="navbar" id="navbar">
   <div class="navbar-inner">
@@ -42,26 +43,38 @@ $equipes = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
     <ul class="nav-links">
       <li><a href="../index.php">INICIO</a></li>
+      <li><a href="../dashboard.php" >DASHBOARD</a></li>
       <li><a href="../pilotos/pilotos.php">PILOTOS</a></li>
       <li><a href="equipes.php" class="active">EQUIPES</a></li>
       <li><a href="../corridas/corridas.php">CALENDARIO</a></li>
+      
     </ul>
-    <div class="nav-user">
+    <?php if (isset($_SESSION['id'])): ?>
+            <div class="nav-user">
                     
                     <a href="../auth/logout.php" class="nav-logout">Sair</a>
                 </div>
+            <?php else: ?>
+            <div class="nav-user">
+                <a href="auth/login.php" class="nav-login">Entrar</a>
+                <a href="auth/cadastro.php" class="nav-cadastro">Registrar</a>
+
+            </div>
+            <?php endif; ?>
     
     
   </div>
 </nav>
 </div>
-<div class="titulo">
+
+<main>
+    <div class="titulo">
       <div class="texto">
         <h1>EQUIPES 2026</h1>
         <p>Aqui você poderá inserir e alterar todas as informações de qualquer equipe quando quiser.</p>
       </div>
         
-        <a href="formularioequipe.php">
+        <a href="create.php">
         <div class="botao">
         <button class="botao"> Adicionar nova equipe</button>
         </div>
@@ -69,36 +82,59 @@ $equipes = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
     </div>
     
-    </main>
-      <hr class="divisor">
-    
-<div class="grid-equipes">
+</main>
+<hr class="divisor">
+
+<div class="grid">
 
     <?php foreach ($equipes as $equipe): ?>
-  <div class="card-equipe">
+  <div class="crud-card">
 
-    <div class="card-equipe-topo">
-      
-      <div class="card-equipe-nome"><?= htmlspecialchars($equipe['equipe']) ?></div>
+    <div class="card-header">
+        <div class="accent-bar"></div>
+
+        <div class="card-title">
+            <?= htmlspecialchars($equipe['equipe']) ?>
+        </div>
+
+        <div class="card-subtitle">
+            Construtora
+        </div>
     </div>
 
-    <div class="card-equipe-stat">
-      <span class="key">Títulos</span>
-      <span class="val"><?= htmlspecialchars($equipe['titulos']) ?></span>
-    </div>
-    <div class="card-equipe-desc">
-      <span class="key">Descrição</span>
-      <?= nl2br(htmlspecialchars($equipe['descricao'])) ?>
+    <div class="card-body">
+
+        <div class="stat-row">
+            <span class="stat-label">Títulos</span>
+            <span class="stat-value">
+                <?= htmlspecialchars($equipe['titulos']) ?>
+            </span>
+        </div>
+
+        <div class="stat-row">
+            <span class="stat-label">Descrição</span>
+        </div>
+
+        <div class="team-badge" style="display:block; border-radius:6px; font-weight:400; color:#555; font-size:13px; line-height:1.5;">
+            <?= nl2br(htmlspecialchars($equipe['descricao'])) ?>
+        </div>
+
     </div>
 
     <div class="card-footer">
-      <a href="editar.php?id=<?= $equipe['id'] ?>" class="action-btn">Editar</a>
-     <a  onclick="return confirm('Tem certeza que deseja excluir?')" href="delete.php?id=<?= $equipe['id'] ?>" class="action-btn danger">Excluir</a>
+        <a href="editar.php?id=<?= $equipe['id'] ?>" class="action-btn">
+            Editar
+        </a>
+
+        <a onclick="return confirm('Tem certeza que deseja excluir?')"
+           href="delete.php?id=<?= $equipe['id'] ?>"
+           class="action-btn danger">
+            Excluir
+        </a>
     </div>
 
-  </div>
+</div>
     <?php endforeach; ?>
 </div>
 </body>
 </html>
-

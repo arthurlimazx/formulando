@@ -1,13 +1,12 @@
 <?php
 include_once '../config/conexao.php';
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nome = trim($_POST['nome']);
+    $nome  = trim($_POST['nome']);
     $email = trim($_POST['email']);
     $senha = trim($_POST['senha']);
 
-    if (empty($email) || empty($senha)) {
+    if (empty($email) || empty($senha) || empty($nome)) {
         header("Location: cadastro.php?erro=Preencha todos os campos");
         exit();
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -17,24 +16,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: cadastro.php?erro=Senha tem menos que 6 letras");
         exit();
     } else {
-       $senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
-    }
-     
+        $senha = password_hash($senha, PASSWORD_DEFAULT);
 
-    try {
-        $stmt= $pdo->prepare('INSERT INTO login (nome, email, senha) VALUES (:nome, :email, :senha)');
-    $stmt->bindValue(":nome", $nome);
-    $stmt->bindValue(":email", $email);
-    $stmt->bindValue(":senha", $senha);
-    $stmt->execute();
+        try {
+            $stmt = $pdo->prepare('INSERT INTO login (nome, email, senha) VALUES (:nome, :email, :senha)');
+            $stmt->bindValue(':nome', $nome);
+            $stmt->bindValue(':email', $email);
+            $stmt->bindValue(':senha', $senha);
+            $stmt->execute();
 
-    
-    header('Location: ../index.php?sucesso=Cadastro realizado');
-    } catch (PDOException $e) {
-        header("Location: cadastro.php?erro=erro_ao_cadastrar");
-        exit();
+            header('Location: login.php?sucesso=Cadastro realizado');
+            exit();
+        } catch (PDOException $e) {
+            header("Location: cadastro.php?erro=Erro ao cadastrar");
+            exit();
+        }
     }
-    
 }
 ?>
 

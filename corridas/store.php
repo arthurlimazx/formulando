@@ -1,9 +1,11 @@
 <?php
 require_once '../auth/protege.php';
-include '../auth/popup.php';
+
 
  include '../config/conexao.php';
 if ($_SERVER['REQUEST_METHOD'] ==='POST') {
+    $id = $_SESSION['id'];
+    $user_id = $_SESSION['id'];
     $gp= $_POST['gp'];
     $data= $_POST['data'];
     $circuito= $_POST['circuito'];
@@ -27,9 +29,10 @@ if (!is_numeric($voltas) || $voltas < 0) {
 }
 
 
-    $sql= 'INSERT INTO corridas(gp, data, circuito, pais, distancia, voltas, obs) VALUES(:gp, :data, :circuito, :pais, :distancia, :voltas, :obs)';
+    $sql= 'INSERT INTO corridas(user_id, gp, data, circuito, pais, distancia, voltas, obs) VALUES(:user_id, :gp, :data, :circuito, :pais, :distancia, :voltas, :obs)';
 
     $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(':user_id', $user_id);
     $stmt->bindValue(':gp', $gp);
     $stmt->bindValue(':data', $data);
     $stmt->bindValue(':circuito', $circuito);

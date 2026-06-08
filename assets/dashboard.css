@@ -1,0 +1,552 @@
+ :root {
+            --red:    #E10600;
+            --red2:   #b30400;
+            --black:  #111111;
+            --dark:   #1a1a1a;
+            --mid:    #555;
+            --muted:  #999;
+            --border: #e8e8e8;
+            --bg:     #f5f5f3;
+            --white:  #ffffff;
+            --card-shadow: 0 2px 16px rgba(0,0,0,0.07);
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--black);
+            font-family: 'Barlow', sans-serif;
+            min-height: 100vh;
+        }
+
+        /* ── PAGE HEADER ── */
+        .dash-header {
+            background: var(--black);
+            padding: 48px 6vw 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dash-header::before {
+            content: 'DASHBOARD';
+            position: absolute;
+            right: 4vw;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: clamp(5rem, 10vw, 9rem);
+            font-weight: 900;
+            color: rgba(255,255,255,0.03);
+            letter-spacing: -2px;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .dash-header-eyebrow {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dash-header-eyebrow::before {
+            content: '';
+            width: 24px;
+            height: 2px;
+            background: var(--red);
+            display: inline-block;
+        }
+
+        .dash-header h1 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            color: #fff;
+            letter-spacing: -1px;
+            line-height: 1;
+        }
+
+        .dash-header-sub {
+            margin-top: 8px;
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 300;
+        }
+
+        
+        .dash-body {
+            padding: 40px 6vw 80px;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+    
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            background: var(--border);
+        }
+
+        .kpi-card {
+            background: var(--white);
+            padding: 32px 28px;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            color: var(--black);
+            transition: background 0.2s;
+        }
+
+        .kpi-card:hover { background: #fafafa; }
+
+        .kpi-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 3px;
+            background: var(--red);
+            transition: width 0.3s ease;
+        }
+
+        .kpi-card:hover::after { width: 100%; }
+
+        .kpi-label {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 12px;
+        }
+
+        .kpi-value {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1;
+            color: var(--black);
+        }
+
+        .kpi-icon {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            font-size: 1.8rem;
+            opacity: 0.12;
+        }
+
+        .kpi-link {
+            margin-top: 12px;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--red);
+        }
+
+    
+        .section-eyebrow {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 6px;
+        }
+
+        .section-title {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            color: var(--black);
+            margin-bottom: 20px;
+        }
+
+      
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+       
+        .next-race-card {
+            background: var(--black);
+            padding: 36px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .next-race-card::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 45%;
+            height: 100%;
+            background: var(--red);
+            clip-path: polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%);
+            opacity: 0.12;
+        }
+
+        .next-race-label {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 10px;
+        }
+
+        .next-race-gp {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: clamp(1.8rem, 3vw, 2.6rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            color: #fff;
+            line-height: 1;
+            letter-spacing: -0.5px;
+            margin-bottom: 24px;
+        }
+
+        .next-race-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .next-race-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .next-race-row:first-child { border-top: 1px solid rgba(255,255,255,0.08); }
+
+        .next-race-key {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #555;
+        }
+
+        .next-race-val {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .no-race-msg {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.1rem;
+            color: #444;
+            padding: 20px 0;
+        }
+
+        /* ── UPCOMING RACES ── */
+        .upcoming-card {
+            background: var(--white);
+            padding: 32px;
+        }
+
+        .race-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .race-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+            text-decoration: none;
+            color: var(--black);
+            transition: padding-left 0.2s;
+        }
+
+        .race-item:first-child { padding-top: 0; }
+        .race-item:last-child  { border-bottom: none; padding-bottom: 0; }
+        .race-item:hover { padding-left: 6px; }
+
+        .race-date-badge {
+            background: var(--red);
+            color: #fff;
+            width: 52px;
+            min-width: 52px;
+            height: 52px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .race-date-day {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .race-date-mon {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.55rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.85;
+        }
+
+        .race-info-gp {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: -0.3px;
+        }
+
+        .race-info-pais {
+            font-size: 0.8rem;
+            color: var(--muted);
+            font-weight: 300;
+            margin-top: 2px;
+        }
+
+        .race-arrow {
+            margin-left: auto;
+            color: var(--red);
+            font-size: 1rem;
+            opacity: 0;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+
+        .race-item:hover .race-arrow {
+            opacity: 1;
+            transform: translateX(4px);
+        }
+
+        /* ── PILOTOS TABLE ── */
+        .table-card {
+            background: var(--white);
+            padding: 32px;
+        }
+
+        .dash-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .dash-table th {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--muted);
+            text-align: left;
+            padding: 0 0 14px 0;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .dash-table td {
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+
+        .dash-table tr:last-child td { border-bottom: none; }
+
+        .dash-table tr:hover td { background: #fafafa; }
+
+        .pilot-num {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: var(--red);
+            width: 48px;
+        }
+
+        .pilot-name {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: -0.2px;
+        }
+
+        .pilot-team {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        .pilot-titles {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-align: right;
+            width: 60px;
+        }
+
+        /* ── EQUIPES RANKING ── */
+        .equipe-rank-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .equipe-rank-item:last-child { border-bottom: none; }
+
+        .equipe-rank-pos {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: var(--border);
+            width: 32px;
+            flex-shrink: 0;
+        }
+
+        .equipe-rank-pos.top { color: var(--red); }
+
+        .equipe-rank-name {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: -0.2px;
+            flex: 1;
+        }
+
+        .equipe-rank-bar-wrap {
+            flex: 1;
+            height: 4px;
+            background: var(--border);
+            position: relative;
+            max-width: 80px;
+        }
+
+        .equipe-rank-bar {
+            height: 100%;
+            background: var(--red);
+            transition: width 1s ease;
+        }
+
+        .equipe-rank-titles {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1rem;
+            font-weight: 900;
+            width: 32px;
+            text-align: right;
+        }
+
+        /* ── QUICK ACTIONS ── */
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            background: var(--border);
+        }
+
+        .action-card {
+            background: var(--white);
+            padding: 28px 24px;
+            text-decoration: none;
+            color: var(--black);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: background 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-card::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0;
+            width: 3px; height: 0;
+            background: var(--red);
+            transition: height 0.25s ease;
+        }
+
+        .action-card:hover { background: #fafafa; }
+        .action-card:hover::before { height: 100%; }
+
+        .action-icon {
+            font-size: 1.6rem;
+            flex-shrink: 0;
+        }
+
+        .action-text-title {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: -0.2px;
+        }
+
+        .action-text-sub {
+            font-size: 0.78rem;
+            color: var(--muted);
+            font-weight: 300;
+            margin-top: 2px;
+        }
+
+        .action-arrow {
+            margin-left: auto;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--red);
+            white-space: nowrap;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+            .kpi-grid { grid-template-columns: 1fr 1fr; }
+            .two-col  { grid-template-columns: 1fr; }
+            .actions-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 500px) {
+            .kpi-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ── FADE IN ── */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .fade-in:nth-child(1) { animation-delay: 0.05s; }
+        .fade-in:nth-child(2) { animation-delay: 0.12s; }
+        .fade-in:nth-child(3) { animation-delay: 0.19s; }
+        .fade-in:nth-child(4) { animation-delay: 0.26s; }
+
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }

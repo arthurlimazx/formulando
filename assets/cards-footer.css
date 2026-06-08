@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Barlow:wght@300;400;500&display=swap');
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2px;
+    background: #e0e0e0;
+    padding: 40px 60px;
+}
+
+
+
+.crud-card {
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.crud-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.10);
+    z-index: 1;
+}
+
+
+
+.card-header {
+    padding: 28px 28px 20px;
+    border-bottom: 1px solid #f0f0f0;
+    position: relative;
+    text-transform: uppercase;
+}
+
+.bignumber {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 4.5rem;
+    font-weight: 900;
+    line-height: 1;
+    color: #f0f0f0;
+    position: absolute;
+    right: 18px;
+    top: 14px;
+    letter-spacing: -2px;
+    pointer-events: none;
+    user-select: none;
+}
+
+.card-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #E10600;
+    margin-bottom: 8px;
+}
+
+.card-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    line-height: 1;
+    color: #111;
+    position: relative;
+    z-index: 1;
+    margin-top: 0;
+}
+
+.card-subtitle {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #aaa;
+    margin-top: 6px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+
+
+.card-body {
+    padding: 0 28px;
+    flex: 1;
+}
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.stat-row:last-child {
+    border-bottom: none;
+}
+
+.stat-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #bbb;
+}
+
+.stat-value {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem;
+    
+    font-weight: 700;
+    color: #111;
+    max-width: 60%;
+    word-break: break-word;
+    text-align: right;
+    
+}
+
+.team-badge {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    
+    color: #555;
+    word-break: break-word;
+    white-space: normal;
+    line-height: 1.5;
+    display: block;
+    padding: 0;
+}
+
+
+
+.card-footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    background: #f9f9f9;
+    border-top: 1px solid #f0f0f0;
+    margin-top: 20px;
+}
+
+.action-btn {
+    padding: 14px;
+    text-align: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: #555;
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.action-btn + .action-btn {
+    border-left: 1px solid #ececec;
+}
+
+.action-btn:hover {
+    background: #111;
+    color: #fff;
+}
+
+.action-btn.danger:hover {
+    background: #E10600;
+    color: #fff;
+}
+
+.divisor {
+    border: none;
+    border-top: 1px solid #e8e8e8;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .grid {
+        padding: 24px 20px;
+        gap: 16px;
+        background: transparent;
+    }
+
+    .crud-card {
+        border: 1px solid #ececec;
+    }
+
+    .titulo {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+        padding: 32px 24px 28px;
+    }
+}

@@ -7,11 +7,13 @@ include '../config/conexao.php';
 
 
 $id = $_GET['id'];
+$user_id = $_SESSION['id'];
 
-$sql= 'SELECT * FROM corridas WHERE id= :id';
+$sql= 'SELECT * FROM corridas WHERE id= :id AND user_id = :user_id';
 
 $stmt= $pdo->prepare($sql);
 $stmt->bindValue(':id', $id);
+$stmt->bindValue(':user_id', $user_id);
 $stmt->execute();
 
 $corrida=$stmt->fetch(PDO::FETCH_ASSOC);
@@ -42,10 +44,11 @@ if (!is_numeric($voltas) || $voltas < 0) {
     exit();
 }
 
-    $sql= 'UPDATE corridas SET gp= :gp, data= :data, circuito=:circuito, pais= :pais, distancia =:distancia, voltas= :voltas, obs= :obs WHERE id=:id';
+    $sql= 'UPDATE corridas SET gp= :gp, data= :data, circuito=:circuito, pais= :pais, distancia =:distancia, voltas= :voltas, obs= :obs WHERE id=:id AND user_id = :user_id';
 
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':id', $id);
+    $stmt->bindValue(':user_id', $user_id);
     $stmt->bindValue(':gp', $gp);
     $stmt->bindValue(':data', $data);
     $stmt->bindValue(':circuito', $circuito);
@@ -73,7 +76,7 @@ if (!is_numeric($voltas) || $voltas < 0) {
     <link rel="stylesheet" href="../assets/form.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Editar Corrida</title>
 </head>
 <body>
     <?php include '../auth/popup.php'; ?>

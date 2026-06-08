@@ -1,11 +1,15 @@
 <?php
+require_once '../auth/protege.php';
 include '../config/conexao.php';
-$id = $_GET['id'];
 
-    $sql= 'SELECT * FROM equipes WHERE id= :id';
+$id = $_GET['id'];
+$user_id = $_SESSION['id'];
+
+    $sql= 'SELECT * FROM equipes WHERE id= :id AND user_id = :user_id';
 
     $stmt= $pdo->prepare($sql);
     $stmt->bindValue(':id', $id);
+    $stmt->bindValue(':user_id', $user_id);
     $stmt->execute();
     $equipe=$stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -15,12 +19,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $equipe = $_POST['equipe'];
     $descricao = $_POST['descricao'];
     $titulos = $_POST['titulos'];
-    
+    if (empty($equipe) || empty($descricao) || empty($titulos)) {
+    header("Location: create.php?erro=Preencha todos os campos");
+    exit();
+}
+if (!is_numeric($titulos) || $titulos < 0) {
+    header("Location: create.php?erro=Títulos inválido");
+    exit();
+}
 
-    $sql = "UPDATE equipes SET equipe = :equipe, descricao = :descricao, titulos = :titulos WHERE id = :id";
+    $sql = "UPDATE equipes SET equipe = :equipe, descricao = :descricao, titulos = :titulos WHERE id = :id AND user_id = :user_id";
 
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':id', $id);
+    $stmt->bindValue(':user_id', $user_id);
     $stmt->bindValue(':equipe', $equipe);
     $stmt->bindValue(':descricao', $descricao);
     $stmt->bindValue(':titulos', $titulos);
@@ -31,7 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: equipes.php");
         exit();
     } else {
-        echo "Erro ao adicionar equipe.";
+        header("Location: editar.php?erro=Erro ao editar equipe");
+        exit();
     }
 }
 ?>
@@ -50,6 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Editar Equipe</title>
 </head>
 <body>
+    <?php include '../auth/popup.php'; ?>
     <div class="form-header">
         <div class="form-header-eyebrow">
             <span>F1</span>
@@ -70,13 +84,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="form-body">
                     <div class="field">
                         <label>Nome da equipe <span class="req">*</span></label>
-                        <input type="text" name="equipe" placeholder="Ex: McLaren" required value="<?= htmlspecialchars($equipe['equipe']) ?>">
+                        <input type="text" name="equipe" placeholder="Ex: McLaren"  value="<?= htmlspecialchars($equipe['equipe']) ?>">
                     </div>
 
                     <div class="field-row">
                         <div class="field">
                             <label>Títulos conquistados</label>
-                            <input type="number" name="titulos" min="0" value="<?= htmlspecialchars($equipe['titulos']) ?>">
+                            <input type="number" name="titulos"  value="<?= htmlspecialchars($equipe['titulos']) ?>">
                         </div>
                     </div>
 
