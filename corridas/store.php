@@ -18,16 +18,16 @@ if ($_SERVER['REQUEST_METHOD'] ==='POST') {
     exit();
 }
 
-if (!DateTime::createFromFormat('Y-m-d', $data)) {
+    if (!DateTime::createFromFormat('d-m-Y', $data)) {
     header("Location: create.php?erro=Data inválida");
     exit();
 }
-if (!is_numeric($distancia) || $distancia < 0) {
+    if (!is_numeric($distancia) || $distancia < 0) {
     header("Location: create.php?erro=Distância inválida");
     exit();
 }
 
-if (!is_numeric($voltas) || $voltas < 0) {
+    if (!is_numeric($voltas) || $voltas < 0) {
     header("Location: create.php?erro=Voltas inválidas");
     exit();
 }
