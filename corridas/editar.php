@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    if (!DateTime::createFromFormat('d-m-Y', $data)) {
+    if (!DateTime::createFromFormat('Y-m-d', $data)) {
         header("Location: editar.php?id=$id&erro=Data inválida");
         exit();
     }
