@@ -80,8 +80,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             <?php else: ?>
             <div class="nav-user">
-                <a href="auth/login.php" class="nav-login">Entrar</a>
-                <a href="auth/cadastro.php" class="nav-cadastro">Registrar</a>
+                <a href="login.php" class="nav-login">Entrar</a>
+                <a href="cadastro.php" class="nav-cadastro">Registrar</a>
             </div>
             
             <?php endif; ?>
