@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $check->bindValue(':email', $email);
         $check->execute();
 
-        if ($check->fetch()) {
+        if ($check->fetchAll()) {
             header("Location: cadastro.php?erro=Este email já está cadastrado");
             exit();
         }

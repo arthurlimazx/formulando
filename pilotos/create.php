@@ -66,7 +66,7 @@ require_once '../auth/protege.php';
 
             foreach ($equipes as $e) {
               $selecionado = (isset($_POST['equipe']) && $_POST['equipe'] == $e['id']) ? 'selected' : '';
-              echo "<option value=\"{$e['id']}\" {$selecionado}>{$e['equipe']}</option>";
+              echo "<option value=\"{$e['equipe']}\" {$selecionado}>{$e['equipe']}</option>";
           }
   ?>
 </select>
