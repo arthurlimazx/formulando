@@ -1,6 +1,7 @@
 <?php
 include_once '../config/conexao.php';
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome  = trim($_POST['nome']);
     $email = trim($_POST['email']);
@@ -15,17 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (strlen($senha) < 6) {
         header("Location: cadastro.php?erro=Senha tem menos que 6 letras");
         exit();
-    } else {
+    } 
     
-        $check = $pdo->prepare('SELECT id FROM login WHERE email = :email');
-        $check->bindValue(':email', $email);
-        $check->execute();
-
-        if ($check->fetchAll()) {
-            header("Location: cadastro.php?erro=Este email já está cadastrado");
-            exit();
-        }
-
+        
         $senha = password_hash($senha, PASSWORD_DEFAULT);
 
         try {
@@ -42,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
         }
     }
-}
+
 ?>
 
 
@@ -54,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="../assets/navbar.css">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Cadastro</title>
 </head>
 <body>
     <?php include 'popup.php'; ?>

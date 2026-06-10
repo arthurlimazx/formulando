@@ -1,0 +1,35 @@
+[33ma60082a[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Update editar.php
+[33m1d80768[m update editar
+[33md8d05af[m ultimo agora
+[33me78be18[m ultimo
+[33m5a33359[m Remoção de uma adição futura
+[33m112f8b8[m ajeitando os nomes
+[33meb39fe7[m faltou o ;
+[33mb87586c[m ajeitando o cadastro
+[33md8de3c3[m agora vai
+[33ma4efc6c[m formatação da data
+[33mff3cc33[m formatação de data
+[33m821fb49[m cadastro denovo
+[33m86e30c5[m cadastro
+[33m0251fca[m tratamneto das tabelas
+[33m41d0be6[m verificação de email no cadastro novamente
+[33m42f4a21[m verificação de email no cadastro
+[33mbfcdea7[m verificação de email no cadastro
+[33mfc0577f[m Deletando config/conexao.php
+[33m3603267[m conexao no create piloto
+[33ma646320[m Buscando no editar agora
+[33mf526586[m Buscando no banco o select de pilotos
+[33m06e190c[m erro no banco no codespaces
+[33m461974f[m erro na data
+[33m5152abb[m erro no link
+[33m88e7eea[m erro no link
+[33m47c4c4b[m refinada final
+[33m1696f7a[m dando mais uma refinada
+[33ma1f6c0b[m (Assets e index) Refinei o projeto pra colocar no codespaces
+[33m7a1c073[m dashboard feita
+[33ma81f1fd[m atualização no auth e calendario feito
+[33m15b34dd[m (CRUD) Adição de pilotos
+[33ma6b3855[m (equipes crud) adição do sistema de equipes
+[33m51bb9aa[m (Config) esqueci da config
+[33mb95b96a[m (Mudança no logout)
+[33m3588d5f[m (Auth) Feito

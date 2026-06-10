@@ -7,14 +7,14 @@ $user_id = $_SESSION['id'];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['id'];
     $gp = $_POST['gp'];
-    $data = $_POST['data'];
+    $dataString = $_POST['data'];
     $circuito = $_POST['circuito'];
     $pais = $_POST['pais'];
     $distancia = $_POST['distancia'];
     $voltas = $_POST['voltas'];
     $obs = $_POST['obs'];
     
-    if (empty($gp) || empty($data) || empty($circuito) || empty($pais) || empty($distancia) || empty($voltas) || empty($obs)) {
+    if (empty($gp) || empty($dataString) || empty($circuito) || empty($pais) || empty($distancia) || empty($voltas) || empty($obs)) {
         header("Location: editar.php?id=$id&erro=Preencha todos os campos");
         exit();
     }
@@ -29,6 +29,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: editar.php?id=$id&erro=Voltas inválidas");
         exit();
     }
+    $data= DateTime::createFromFormat('Y-m-d', $dataString);
+    if (!$data || $data->format('Y-m-d') !== $dataString) {
+    header('Location: create.php?erro=Data invalida');
+    exit();
+}
+    if ($data < new DateTime()) {
+    header ('Location: create.php?erro=Data menor que hoje');
+    exit();
+
+}
 
     $sql = 'UPDATE corridas SET gp= :gp, data= :data, circuito=:circuito, pais= :pais, distancia =:distancia, voltas= :voltas, obs= :obs WHERE id=:id AND user_id = :user_id';
 
@@ -36,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bindValue(':id', $id);
     $stmt->bindValue(':user_id', $user_id);
     $stmt->bindValue(':gp', $gp);
-    $stmt->bindValue(':data', $data);
+    $stmt->bindValue(':data', $dataString);
     $stmt->bindValue(':circuito', $circuito);
     $stmt->bindValue(':pais', $pais);
     $stmt->bindValue(':voltas', $voltas);
